@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,8 +6,8 @@ public class Ball : MonoBehaviour
 {
     public enum Direction
     {
-        Right,
-        Left,
+        Right,  // X증가 // Test : 한글 있어도 안깨짐.
+        Left,   // Z증가
     }
     Direction direction = Direction.Right;
 
