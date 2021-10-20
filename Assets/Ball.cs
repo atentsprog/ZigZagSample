@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Ball : MonoBehaviour
 {
@@ -18,8 +20,17 @@ public class Ball : MonoBehaviour
     public float speed = 5;
     private Quaternion originRotate;
 
+    public Text pointText;
+    public int point;
+    public float gameOverHeight = 1.3f;
     void Update()
     {
+        if (transform.position.y < gameOverHeight)
+        {
+            Debug.LogWarning("게임 종료");
+            return;
+        }
+
         if (Input.anyKeyDown)
         {
             direction = (direction == Direction.Right) ? Direction.Left : Direction.Right;
@@ -27,11 +38,19 @@ public class Ball : MonoBehaviour
             velocity.x = 0;
             velocity.z = 0;
             GetComponent<Rigidbody>().velocity = velocity;
+
+            AddPoint(1);
         }
 
         transform.rotation = originRotate;
 
         BallMove();
+    }
+
+    private void AddPoint(int addPoint)
+    {
+        point += addPoint;
+        pointText.text = point.ToString();
     }
 
     private void BallMove()
