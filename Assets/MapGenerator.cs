@@ -8,6 +8,7 @@ public class MapGenerator : MonoBehaviour
 {
     public Transform cubeParent;
     public Cube baseItem;
+    public GameObject jewel;
     public int makeCount = 20;
 
     private void Awake()
@@ -36,6 +37,17 @@ public class MapGenerator : MonoBehaviour
 
             neweCube.transform.localPosition = previousPos;
             previousPos = neweCube.transform.localPosition;
+
+            if (Random.Range(0, 2) == 0)
+            {
+                //보석 배치 하자.
+                var neweJewel = Instantiate(jewel);
+
+
+                neweJewel.transform.position = neweCube.transform.position;
+                float addY = neweCube.transform.lossyScale.y * 0.5f;
+                neweJewel.transform.Translate(0, addY, 0, Space.World);
+            }
         }
     }
 
