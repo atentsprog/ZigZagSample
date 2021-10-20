@@ -4,23 +4,22 @@ using UnityEngine;
 
 public class MoveOnlyZ : MonoBehaviour
 {
+    public Transform followTr;
+    public Vector3 offset;
+
     public float x;
     public float y;
-    Quaternion rotation;
     void Start()
     {
+        offset = transform.position - followTr.position;
         x = transform.position.x;
         y = transform.position.y;
-        rotation = transform.rotation;
     }
-
-    void LateUpdate()
+    private void Update()
     {
-        var pos = transform.position;
+        var pos = offset + followTr.position;
         pos.x = x;
         pos.y = y;
         transform.position = pos;
-
-        transform.rotation = rotation;
     }
 }
