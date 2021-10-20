@@ -10,14 +10,26 @@ public class Ball : MonoBehaviour
         Left,   // Z증가
     }
     Direction direction = Direction.Right;
+    void Start()
+    {
+        originRotate = transform.rotation;
+    }
 
     public float speed = 5;
+    private Quaternion originRotate;
+
     void Update()
     {
-        if(Input.anyKeyDown)
+        if (Input.anyKeyDown)
         {
             direction = (direction == Direction.Right) ? Direction.Left : Direction.Right;
+            var velocity = GetComponent<Rigidbody>().velocity;
+            velocity.x = 0;
+            velocity.z = 0;
+            GetComponent<Rigidbody>().velocity = velocity;
         }
+
+        transform.rotation = originRotate;
 
         BallMove();
     }
